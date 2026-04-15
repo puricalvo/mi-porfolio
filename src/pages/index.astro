@@ -20,8 +20,8 @@ import ProjectCard from '../components/ProjectCard.astro';
                 <div class="absolute -inset-1 bg-linear-to-r from-blue-500 to-emerald-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                 <div class="relative bg-slate-900 rounded-2xl overflow-hidden border border-slate-700 w-64 h-64 md:w-80 md:h-80">
                     <img 
-                        src="../../public/samurai-programando.png" 
-                        alt="Purificación Calvo - Samurai del Código" 
+                        src={`${import.meta.env.BASE_URL}samurai-programando.png`} 
+                        alt="Samurai" 
                         class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                     />
                 </div>
