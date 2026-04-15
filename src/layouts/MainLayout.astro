@@ -1,0 +1,29 @@
+---
+const {title = "Mi Porfolio | Go & React" } = Astro.props;
+import "../styles/global.css"; // Donde Tailwind vive
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<title>{title}</title>
+	</head>
+	<body class="bg-slate-900 text-white antialiased">
+		<nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
+			<span class="font-bold text-xl text-blue-400">Purificación Calvo</span>
+			<div class="space-x-4">
+				<a href="#proyectos" class="hover:text-blue-400">Proyectos</a>
+				<a href="https://github.com/puricalvo/twittergo" target="_blank" class="hover:text-blue-400">GitHub</a>
+			</div>
+		</nav>
+		
+		<main class="max-w-6xl mx-auto px-6">
+			<slot /> </main>
+
+		<footer class="text-center py-10 text-slate-500">
+			© {new Date().getFullYear()} - Hecho con Astro y Go en el backend
+		</footer>
+	</body>
+</html>
