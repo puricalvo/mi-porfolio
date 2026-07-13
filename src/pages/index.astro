@@ -1,57 +1,95 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import FeaturedProjectCard from '../components/FeaturedProjectCard.astro';
 import samuraiImage from '../assets/samurai-programando.png';
 import cvPDF from '../assets/cv-puri-calvo.pdf';
+import { featuredProject, projects } from '../data/projects';
 ---
 
 <MainLayout title="Porfolio | Fullstack Developer">
-    <section class="py-20">
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-4">
+    <section class="pt-4 pb-8 md:py-20">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
             Construyo <span class="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-emerald-400">sistemas escalables</span>
         </h1>
-        <p class="text-xl text-slate-400 max-w-2xl">
-            Especialista en <strong>Go</strong>, <strong>AWS Serverless</strong> y <strong>React</strong>. 
-            Enfocado en rendimiento y arquitectura limpia.
+        <p class="text-base sm:text-lg md:text-xl text-slate-400 leading-relaxed">
+            Desarrollo soluciones <strong>fullstack</strong> con especial interés por el
+            <strong>backend de alto rendimiento</strong> y las arquitecturas
+            <strong>Serverless</strong>, creando aplicaciones escalables con tecnologías como
+            <strong>Go</strong>, <strong>PHP</strong> y <strong>React</strong>.
         </p>
     </section>
 
-    <section id="sobre-mi" class="py-20 border-t border-slate-800">
+    <section id="sobre-mi" class="py-10 md:py-20 border-t border-slate-800">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div class="relative group mx-auto md:mx-0">
                 <div class="absolute -inset-1 bg-linear-to-r from-blue-500 to-emerald-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                 <div class="relative bg-slate-900 rounded-2xl overflow-hidden border border-slate-700 w-64 h-64 md:w-80 md:h-80">
                     <img 
                         src={samuraiImage.src} alt="Samurai programando"
-                        class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                        class="w-full h-full object-cover grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500"
                     />
                 </div>
             </div>
 
             <div>
                 <h2 class="text-3xl font-bold mb-6 text-white">Sobre mi trayectoria</h2>
-                <div class="space-y-4 text-slate-400 text-lg leading-relaxed text-pretty">
-                    <p>Llevo <span class="text-blue-400 font-semibold">3 años</span> sumergido en el ecosistema del desarrollo de software. Mi viaje empezó de forma autodidacta, impulsado por la curiosidad de entender cómo se construyen las herramientas que usamos a diario.</p>
-                    <p>A diferencia de muchos desarrolladores que se quedan en la superficie, me apasiona el **backend de alto rendimiento**. Por eso me especialicé en <span class="text-white font-medium">Go</span> y arquitecturas **Serverless** en AWS, buscando siempre la solución más eficiente y escalable.</p>
+                <div class="space-y-4 text-slate-400 text-base sm:text-lg leading-relaxed">
+                    <p>
+                        Mi trayectoria en el desarrollo de software comenzó de forma autodidacta, impulsada por la curiosidad de entender cómo se construyen las aplicaciones y los sistemas que utilizamos cada día. Desde entonces, he mantenido una formación continua y un aprendizaje constante, desarrollando proyectos cada vez más completos y desafiantes.
+                    </p>
+
+                    <p>
+                        Con el tiempo descubrí que mi mayor interés estaba en el
+                        <span class="text-white font-medium">backend de alto rendimiento</span>
+                        y en el diseño de arquitecturas escalables. Aunque mi especialización se centra en
+                        <span class="text-white font-medium">Go</span>
+                        y las arquitecturas
+                        <span class="text-white font-medium">Serverless</span>
+                        sobre AWS, también desarrollo aplicaciones fullstack con tecnologías como
+                        <span class="text-white font-medium">PHP</span>,
+                        <span class="text-white font-medium">React</span>
+                        y
+                        <span class="text-white font-medium">MySQL</span>,
+                        eligiendo siempre la herramienta más adecuada para cada proyecto.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="proyectos" class="py-10 border-t border-slate-800">
-        <h2 class="text-3xl font-bold mb-8 text-white">Proyectos Destacados</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ProjectCard 
-                title="TwitterGo - Red Social Serverless"
-                description="Arquitectura robusta con backend en Go y almacenamiento en S3. Optimización de imágenes en cliente y diseño 100% responsive con SASS."
-                tags={["Go", "React", "AWS Lambda", "S3"]}
-                demoUrl="https://puricalvo.github.io/twitterGo-client"
-                codeUrl="https://github.com/puricalvo/twittergo"
-            />
+    <section id="proyecto-destacado" class="py-10 md:py-20 border-t border-slate-800">
+
+            <h2 class="text-3xl font-bold mb-4 text-white">
+                ⭐ Proyecto Destacado
+            </h2>
+
+            <p class="text-slate-400 mb-10 max-w-3xl">
+                Mi proyecto más completo hasta la fecha. Un CMS desarrollado desde cero
+                con arquitectura modular, API REST, Dashboard dinámico, instalación
+                automática y una demo pública completamente funcional.
+            </p>
+
+            <FeaturedProjectCard project={featuredProject} />
+
+    </section>
+
+   <section id="proyecto-destacado" class="py-10 md:py-20 border-t border-slate-800">
+        <h2 class="text-3xl font-bold mb-10 text-white">Proyectos Destacados</h2>
+        <div class="grid grid-cols-1 gap-6">
+            {projects.map((project) => (
+                <ProjectCard
+                    title={project.title}
+                    description={project.description}
+                    tags={project.tags}
+                    demoUrl={project.demoUrl}
+                    codeUrl={project.codeUrl}
+                />
+            ))}
         </div>
     </section>
 
-    <section id="skills" class="py-20 border-t border-slate-800">
+    <section id="skills" class="py-10 md:py-20 border-t border-slate-800">
         <h2 class="text-3xl font-bold mb-12 text-white text-center">Tech Stack & Herramientas</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
@@ -84,10 +122,10 @@ import cvPDF from '../assets/cv-puri-calvo.pdf';
 
     </div>
     </section>
-    <section id="contacto" class="py-20 border-t border-slate-800 text-center">
+    <section id="contacto" class="py-8 md:py-20 border-t border-slate-800 text-center">
         <h2 class="text-3xl font-bold mb-8 text-white">¿Hablamos?</h2>
         <p class="text-slate-400 mb-8 max-w-xl mx-auto">
-            Estoy abierta a nuevas oportunidades donde pueda aportar mi experiencia en gestión, atención al cliente y mi capacidad técnica como desarrolladora.
+            Busco nuevas oportunidades donde pueda aportar mi experiencia desarrollando software, arquitectura backend y soluciones escalables.
         </p>
         
         <div class="flex flex-col md:flex-row justify-center gap-4">

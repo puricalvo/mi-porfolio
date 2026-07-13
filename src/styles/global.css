@@ -1,9 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  /* Aquí puedes añadir tus colores personalizados si quieres */
+  /* Colores principales */
   --color-brand-blue: #3b82f6;
   --color-brand-go: #00add8; /* Color oficial de Golang */
+  --color-brand-green: #10b981;
+
+  /* Fondo */
+  --color-background: #0f172a;
+
+  /* Tarjetas */
+  --color-card: #1e293b;
+
+  /* Bordes */
+  --color-card-border: #334155;
+
+  /* Texto */
+  --color-text-muted: #94a3b8;
+  
 }
 
 /* Estilos base opcionales */
