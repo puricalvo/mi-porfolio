@@ -2,6 +2,7 @@
 import ProjectGallery from './ProjectGallery.astro';
 import Badge from "./Badge.astro";
 import Button from "./Button.astro";
+import CredentialModal from "./CredentialModal.astro";
 
 const { project } = Astro.props;
 ---
@@ -71,6 +72,21 @@ const { project } = Astro.props;
                 href={project.installerUrl}
                 text="⚙️ Instalador"
                 variant="outline"
+            />
+
+        </div>
+
+        <div class="mt-5 pt-5 border-t border-slate-700">
+
+            <p class="text-sm text-slate-500 mb-2">
+                Acceso a la demo:
+            </p>
+
+            <CredentialModal
+                id="cms-builder-credentials"
+                title="CMS Builder · Credenciales"
+                username={project.credentials.username}
+                password={project.credentials.password}
             />
 
         </div>

@@ -2,6 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import FeaturedProjectCard from '../components/FeaturedProjectCard.astro';
+import CoffeeProjectsCard from '../components/CoffeeProjectsCard.astro';
 import samuraiImage from '../assets/samurai-programando.png';
 import cvPDF from '../assets/cv-puri-calvo.pdf';
 import { featuredProject, projects } from '../data/projects';
@@ -13,10 +14,18 @@ import { featuredProject, projects } from '../data/projects';
             Construyo <span class="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-emerald-400">sistemas escalables</span>
         </h1>
         <p class="text-base sm:text-lg md:text-xl text-slate-400 leading-relaxed">
-            Desarrollo soluciones <strong>fullstack</strong> con especial interés por el
-            <strong>backend de alto rendimiento</strong> y las arquitecturas
-            <strong>Serverless</strong>, creando aplicaciones escalables con tecnologías como
-            <strong>Go</strong>, <strong>PHP</strong> y <strong>React</strong>.
+            Desarrollo soluciones <strong>fullstack</strong>, trabajando tanto en backend como en frontend y construyendo aplicaciones web completas con tecnologías como
+            <strong>PHP</strong>,
+            <strong>Go</strong>,
+            <strong>JavaScript</strong>,
+            <strong>TypeScript</strong>,
+            <strong>Astro</strong>,
+            <strong>React</strong>,
+            <strong>Vue</strong>
+            y
+            <strong>MySQL</strong>.
+            También tengo experiencia con <strong>REST API</strong>, <strong>Tailwind CSS</strong>, <strong>AWS</strong>
+            y arquitecturas <strong>Serverless</strong>, adaptando la tecnología y la arquitectura a las necesidades de cada proyecto.
         </p>
     </section>
 
@@ -40,18 +49,23 @@ import { featuredProject, projects } from '../data/projects';
                     </p>
 
                     <p>
-                        Con el tiempo descubrí que mi mayor interés estaba en el
-                        <span class="text-white font-medium">backend de alto rendimiento</span>
-                        y en el diseño de arquitecturas escalables. Aunque mi especialización se centra en
-                        <span class="text-white font-medium">Go</span>
-                        y las arquitecturas
-                        <span class="text-white font-medium">Serverless</span>
-                        sobre AWS, también desarrollo aplicaciones fullstack con tecnologías como
+                        A lo largo de este proceso he adquirido experiencia trabajando en distintas partes del desarrollo de software, desde el diseño de APIs y sistemas backend hasta la creación de interfaces y aplicaciones web completas. Trabajo con tecnologías como
                         <span class="text-white font-medium">PHP</span>,
-                        <span class="text-white font-medium">React</span>
+                        <span class="text-white font-medium">Go</span>,
+                        <span class="text-white font-medium">JavaScript</span>,
+                        <span class="text-white font-medium">TypeScript</span>,
+                        <span class="text-white font-medium">Astro</span>,
+                        <span class="text-white font-medium">React</span>,
+                        <span class="text-white font-medium">Vue</span>
                         y
                         <span class="text-white font-medium">MySQL</span>,
-                        eligiendo siempre la herramienta más adecuada para cada proyecto.
+                        además de tecnologías y servicios como
+                        <span class="text-white font-medium">Tailwind CSS</span>,
+                        <span class="text-white font-medium">REST API</span>,
+                        <span class="text-white font-medium">AWS</span>
+                        y arquitecturas
+                        <span class="text-white font-medium">Serverless</span>.
+                        Mi objetivo es comprender el sistema en su conjunto y elegir las herramientas y la arquitectura más adecuadas para cada proyecto.
                     </p>
                 </div>
             </div>
@@ -74,54 +88,78 @@ import { featuredProject, projects } from '../data/projects';
 
     </section>
 
-   <section id="proyecto-destacado" class="py-10 md:py-20 border-t border-slate-800">
-        <h2 class="text-3xl font-bold mb-10 text-white">Proyectos Destacados</h2>
-        <div class="grid grid-cols-1 gap-6">
-            {projects.map((project) => (
-                <ProjectCard
-                    title={project.title}
-                    description={project.description}
-                    tags={project.tags}
-                    demoUrl={project.demoUrl}
-                    codeUrl={project.codeUrl}
-                />
-            ))}
-        </div>
-    </section>
+   <section id="proyectos" class="py-10 md:py-20 border-t border-slate-800">
+    <h2 class="text-3xl font-bold mb-10 text-white">Proyectos</h2>
 
-    <section id="skills" class="py-10 md:py-20 border-t border-slate-800">
-        <h2 class="text-3xl font-bold mb-12 text-white text-center">Tech Stack & Herramientas</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <div class="bg-slate-800/30 p-6 rounded-2xl border border-slate-700/50 hover:bg-slate-800/50 transition-colors">
-            <h3 class="text-xl font-bold text-white mb-4">Backend & Cloud</h3>
-            <ul class="space-y-2 text-slate-400">
-                <li>• Go (Golang)</li>
-                <li>• AWS (Lambda, S3, API Gateway)</li>
-                <li>• REST APIs & Serverless</li>
-            </ul>
-        </div>
+    <div class="space-y-6">
 
-        <div class="bg-slate-800/30 p-6 rounded-2xl border border-slate-700/50 hover:bg-slate-800/50 transition-colors">
-            <h3 class="text-xl font-bold text-white mb-4">Frontend</h3>
-            <ul class="space-y-2 text-slate-400">
-                <li>• React & Hooks</li>
-                <li>• SASS & Tailwind CSS</li>
-                <li>• Astro (Static Site Gen)</li>
-            </ul>
-        </div>
+        <CoffeeProjectsCard projects={projects} />
 
-        <div class="bg-slate-800/30 p-6 rounded-2xl border border-slate-700/50 hover:bg-slate-800/50 transition-colors">
-            <h3 class="text-xl font-bold text-white mb-4">Herramientas</h3>
-            <ul class="space-y-2 text-slate-400">
-                <li>• Git & GitHub</li>
-                <li>• Docker (Conceptos básicos)</li>
-                <li>• CI/CD (GitHub Actions)</li>
-            </ul>
-        </div>
+        <ProjectCard
+            title={projects[2].title}
+            description={projects[2].description}
+            tags={projects[2].tags}
+            demoUrl={projects[2].demoUrl}
+            codeUrl={projects[2].codeUrl}
+        />
 
     </div>
+</section>
+
+    <section id="skills" class="py-10 md:py-20 border-t border-slate-800">
+        <h2 class="text-3xl font-bold mb-12 text-white text-center">
+            Tech Stack & Herramientas
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <div class="bg-slate-800/30 p-6 rounded-2xl border border-slate-700/50 hover:bg-slate-800/50 transition-colors">
+                <h3 class="text-xl font-bold text-white mb-4">
+                    Backend & APIs
+                </h3>
+
+                <ul class="space-y-2 text-slate-400">
+                    <li>• PHP</li>
+                    <li>• Go (Golang)</li>
+                    <li>• JavaScript & TypeScript</li>
+                    <li>• REST APIs</li>
+                    <li>• Arquitecturas Serverless</li>
+                </ul>
+            </div>
+
+
+            <div class="bg-slate-800/30 p-6 rounded-2xl border border-slate-700/50 hover:bg-slate-800/50 transition-colors">
+                <h3 class="text-xl font-bold text-white mb-4">
+                    Frontend
+                </h3>
+
+                <ul class="space-y-2 text-slate-400">
+                    <li>• Astro</li>
+                    <li>• React</li>
+                    <li>• Vue</li>
+                    <li>• Tailwind CSS</li>
+                    <li>• SASS</li>
+                </ul>
+            </div>
+
+
+            <div class="bg-slate-800/30 p-6 rounded-2xl border border-slate-700/50 hover:bg-slate-800/50 transition-colors">
+                <h3 class="text-xl font-bold text-white mb-4">
+                    Datos, Cloud & Herramientas
+                </h3>
+
+                <ul class="space-y-2 text-slate-400">
+                    <li>• MySQL</li>
+                    <li>• AWS (Lambda, S3, API Gateway)</li>
+                    <li>• Git & GitHub</li>
+                    <li>• Docker</li>
+                    <li>• CI/CD (GitHub Actions)</li>
+                </ul>
+            </div>
+
+        </div>
     </section>
+
     <section id="contacto" class="py-8 md:py-20 border-t border-slate-800 text-center">
         <h2 class="text-3xl font-bold mb-8 text-white">¿Hablamos?</h2>
         <p class="text-slate-400 mb-8 max-w-xl mx-auto">

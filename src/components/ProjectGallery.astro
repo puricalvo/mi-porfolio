@@ -9,14 +9,16 @@ interface Props {
 }
 
 const { images } = Astro.props as Props;
+
+const galleryId = `gallery-${Math.random().toString(36).slice(2, 10)}`;
 ---
 
-<div class="relative" data-gallery>
+<div class="relative" data-gallery={galleryId}>
 
     <div class="overflow-hidden rounded-2xl border border-slate-700 mb-6 sm:mb-8">
 
         <img
-            id="gallery-image"
+            data-gallery-image
             src={images[0].src}
             alt={images[0].title}
             class="w-full h-auto transition-opacity duration-500"
@@ -26,7 +28,7 @@ const { images } = Astro.props as Props;
 
 
     <p
-        id="gallery-title"
+        data-gallery-title
         class="mt-5 text-center text-slate-400 text-sm"
     >
         {images[0].title}
@@ -35,11 +37,11 @@ const { images } = Astro.props as Props;
 
     <div class="flex items-center justify-center gap-6 mt-4">
 
-
         <button
-            id="prev-button"
             type="button"
+            data-gallery-prev
             class="text-blue-400 hover:text-white transition duration-200 hover:scale-110 cursor-pointer"
+            aria-label="Imagen anterior"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,19 +60,24 @@ const { images } = Astro.props as Props;
         </button>
 
 
-        <div id="gallery-dots" class="flex gap-2">
+        <div
+            data-gallery-dots
+            class="flex gap-2"
+        >
 
             {
                 images.map((_, index) => (
-                    <span
+                    <button
+                        type="button"
+                        data-gallery-dot={index}
+                        aria-label={`Ver imagen ${index + 1}`}
                         class:list={[
-                            "w-2 h-2 rounded-full transition",
+                            "w-2 h-2 rounded-full transition cursor-pointer",
                             index === 0
                                 ? "bg-blue-500"
                                 : "bg-slate-600",
                         ]}
-                        data-dot={index}
-                    ></span>
+                    ></button>
                 ))
             }
 
@@ -78,9 +85,10 @@ const { images } = Astro.props as Props;
 
 
         <button
-            id="next-button"
             type="button"
+            data-gallery-next
             class="text-blue-400 hover:text-white transition duration-200 hover:scale-110 cursor-pointer"
+            aria-label="Imagen siguiente"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -98,103 +106,144 @@ const { images } = Astro.props as Props;
             </svg>
         </button>
 
-
     </div>
 
 </div>
 
 
-<script is:inline define:vars={{ images }}>
+<script is:inline define:vars={{ images, galleryId }}>
 
-const image = document.querySelector("#gallery-image");
-const title = document.querySelector("#gallery-title");
+    const gallery = document.querySelector(
+        `[data-gallery="${galleryId}"]`
+    );
 
-const prev = document.querySelector("#prev-button");
-const next = document.querySelector("#next-button");
+    if (gallery) {
 
-const dots = document.querySelectorAll("[data-dot]");
+        const image = gallery.querySelector(
+            "[data-gallery-image]"
+        );
+
+        const title = gallery.querySelector(
+            "[data-gallery-title]"
+        );
+
+        const prev = gallery.querySelector(
+            "[data-gallery-prev]"
+        );
+
+        const next = gallery.querySelector(
+            "[data-gallery-next]"
+        );
+
+        const dots = gallery.querySelectorAll(
+            "[data-gallery-dot]"
+        );
 
 
-let current = 0;
+        if (
+            image instanceof HTMLImageElement &&
+            title instanceof HTMLElement &&
+            prev instanceof HTMLButtonElement &&
+            next instanceof HTMLButtonElement
+        ) {
+
+            let current = 0;
 
 
-function updateGallery(){
+            function updateGallery() {
 
-    image.classList.add("opacity-0");
-
-
-    setTimeout(()=>{
-
-        image.src = images[current].src;
-        image.alt = images[current].title;
-
-        title.textContent = images[current].title;
+                image.classList.add("opacity-0");
 
 
-        dots.forEach((dot,index)=>{
+                setTimeout(() => {
 
-            if(index === current){
+                    image.src = images[current].src;
+                    image.alt = images[current].title;
 
-                dot.classList.remove("bg-slate-600");
-                dot.classList.add("bg-blue-500");
+                    title.textContent =
+                        images[current].title;
 
-            } else {
 
-                dot.classList.remove("bg-blue-500");
-                dot.classList.add("bg-slate-600");
+                    dots.forEach((dot, index) => {
+
+                        if (index === current) {
+
+                            dot.classList.remove(
+                                "bg-slate-600"
+                            );
+
+                            dot.classList.add(
+                                "bg-blue-500"
+                            );
+
+                        } else {
+
+                            dot.classList.remove(
+                                "bg-blue-500"
+                            );
+
+                            dot.classList.add(
+                                "bg-slate-600"
+                            );
+
+                        }
+
+                    });
+
+
+                    image.classList.remove("opacity-0");
+
+                }, 250);
 
             }
 
-        });
+
+            prev.addEventListener("click", () => {
+
+                current--;
+
+                if (current < 0) {
+                    current = images.length - 1;
+                }
+
+                updateGallery();
+
+            });
 
 
-        image.classList.remove("opacity-0");
+            next.addEventListener("click", () => {
+
+                current++;
+
+                if (current >= images.length) {
+                    current = 0;
+                }
+
+                updateGallery();
+
+            });
 
 
-    },250);
+            dots.forEach((dot) => {
 
-}
+                dot.addEventListener("click", () => {
 
+                    const index = Number(
+                        dot.getAttribute(
+                            "data-gallery-dot"
+                        )
+                    );
 
+                    current = index;
 
-prev.addEventListener("click",()=>{
+                    updateGallery();
 
-    current--;
+                });
 
-    if(current < 0){
-        current = images.length - 1;
+            });
+
+        }
+
     }
-
-    updateGallery();
-
-});
-
-
-
-next.addEventListener("click",()=>{
-
-    current++;
-
-    if(current >= images.length){
-        current = 0;
-    }
-
-    updateGallery();
-
-});
-
-
-
-dots.forEach((dot,index)=>{
-
-    dot.addEventListener("click",()=>{
-
-        current = index;
-
-        updateGallery();
-
-    });
-
-});
 
 </script>
