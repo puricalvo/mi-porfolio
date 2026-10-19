@@ -95,13 +95,16 @@ import { featuredProject, projects } from '../data/projects';
 
         <CoffeeProjectsCard projects={projects} />
 
-        <ProjectCard
-            title={projects[2].title}
-            description={projects[2].description}
-            tags={projects[2].tags}
-            demoUrl={projects[2].demoUrl}
-            codeUrl={projects[2].codeUrl}
-        />
+        {projects.slice(2).map((project) => (
+            <ProjectCard
+                title={project.title}
+                description={project.description}
+                tags={project.tags}
+                demoUrl={project.demoUrl}
+                codeUrl={project.codeUrl}
+                apiUrl={project.apiUrl}
+            />
+        ))}
 
     </div>
 </section>

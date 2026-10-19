@@ -118,6 +118,24 @@ export const projects = [
   },
 
   {
+    title: "Calendario de servicios",
+    description:
+      "Aplicación fullstack para organizar servicios semanales de conductores. Incluye acceso por roles, asignación de servicios y descansos, seguimiento de incidencias y mensajería entre empleados y administración con historial paginado y confirmaciones de lectura.",
+    tags: [
+      "React",
+      "Material UI",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "JWT",
+      "REST API",
+    ],
+    demoUrl: "https://calendar-blush-xi-53.vercel.app/",
+    codeUrl: "https://github.com/puricalvo/calendar",
+    apiUrl: "https://github.com/puricalvo/calendar-backend",
+  },
+
+  {
     title: "TwitterGo - Red Social Serverless",
     description:
       "Aplicación de red social construida con una arquitectura Serverless, utilizando Go para el backend y servicios de AWS para desplegar funciones y gestionar recursos, junto con un frontend en React.",
