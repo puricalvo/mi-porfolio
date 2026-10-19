@@ -6,9 +6,10 @@ interface Props {
 	tags: string[];
 	demoUrl: string;
 	codeUrl: string;
+	apiUrl?: string;
 }
 
-const { title, description, tags, demoUrl, codeUrl } = Astro.props;
+const { title, description, tags, demoUrl, codeUrl, apiUrl } = Astro.props;
 ---
 
 <div class="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden hover:border-blue-500 transition-all group">
@@ -27,6 +28,7 @@ const { title, description, tags, demoUrl, codeUrl } = Astro.props;
 		<div class="flex gap-4">
 			<a href={demoUrl} target="_blank" class="text-blue-400 font-bold hover:underline">Ver Demo →</a>
 			<a href={codeUrl} target="_blank" class="text-slate-300 hover:text-white">Código Fuente</a>
+			{apiUrl && <a href={apiUrl} target="_blank" class="text-slate-300 hover:text-white">Código API</a>}
 		</div>
 	</div>
 </div>
