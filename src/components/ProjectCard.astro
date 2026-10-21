@@ -1,5 +1,13 @@
 ---
 // src/components/ProjectCard.astro
+import CredentialModal from "./CredentialModal.astro";
+
+interface DemoCredential {
+	title: string;
+	username: string;
+	password: string;
+}
+
 interface Props {
 	title: string;
 	description: string;
@@ -7,9 +15,10 @@ interface Props {
 	demoUrl: string;
 	codeUrl: string;
 	apiUrl?: string;
+	credentials?: DemoCredential[];
 }
 
-const { title, description, tags, demoUrl, codeUrl, apiUrl } = Astro.props;
+const { title, description, tags, demoUrl, codeUrl, apiUrl, credentials } = Astro.props;
 ---
 
 <div class="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden hover:border-blue-500 transition-all group">
@@ -30,5 +39,20 @@ const { title, description, tags, demoUrl, codeUrl, apiUrl } = Astro.props;
 			<a href={codeUrl} target="_blank" class="text-slate-300 hover:text-white">Código Fuente</a>
 			{apiUrl && <a href={apiUrl} target="_blank" class="text-slate-300 hover:text-white">Código API</a>}
 		</div>
+		{credentials?.length && (
+			<div class="mt-5 pt-5 border-t border-slate-700">
+				<p class="text-sm text-slate-500 mb-2">Acceso a la demo:</p>
+				<div class="flex flex-wrap gap-4">
+					{credentials.map((credential, index) => (
+						<CredentialModal
+							id={`project-credentials-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${index}`}
+							title={credential.title}
+							username={credential.username}
+							password={credential.password}
+						/>
+					))}
+				</div>
+			</div>
+		)}
 	</div>
 </div>

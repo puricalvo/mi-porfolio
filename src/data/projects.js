@@ -133,14 +133,33 @@ export const projects = [
     demoUrl: "https://calendar-blush-xi-53.vercel.app/",
     codeUrl: "https://github.com/puricalvo/calendar",
     apiUrl: "https://github.com/puricalvo/calendar-backend",
+    credentials: [
+      {
+        title: "Calendario · Conductor 1",
+        username: "user1@demo.invalid",
+        password: "user123456",
+      },
+      {
+        title: "Calendario · Conductor 2",
+        username: "user2@demo.invalid",
+        password: "user123456",
+      },
+    ],
   },
 
   {
     title: "TwitterGo - Red Social Serverless",
     description:
-      "Aplicación de red social construida con una arquitectura Serverless, utilizando Go para el backend y servicios de AWS para desplegar funciones y gestionar recursos, junto con un frontend en React.",
-    tags: ["Go", "React", "AWS Lambda", "API Gateway", "S3"],
-    demoUrl: "https://puricalvo.github.io/twitterGo-client",
+      "Red social construida con Go y React. Esta demo independiente está poblada con perfiles y publicaciones ficticios y se puede explorar en modo de solo lectura.",
+    tags: ["Go", "React", "MongoDB", "GridFS", "API REST"],
+    demoUrl: "https://puricalvo.github.io/twitterGo-demo-client/",
     codeUrl: "https://github.com/puricalvo/twittergo",
+    credentials: [
+      {
+        title: "TwitterGo · Credenciales",
+        username: "demo@twittergo.invalid",
+        password: "demo123456",
+      },
+    ],
   },
 ];
