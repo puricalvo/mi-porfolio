@@ -1,6 +1,12 @@
 ---
 // src/components/ProjectCard.astro
+import ProjectGallery from "./ProjectGallery.astro";
 import CredentialModal from "./CredentialModal.astro";
+
+interface ProjectImage {
+	src: string;
+	title: string;
+}
 
 interface DemoCredential {
 	title: string;
@@ -12,13 +18,15 @@ interface Props {
 	title: string;
 	description: string;
 	tags: string[];
+	features?: string[];
+	gallery?: ProjectImage[];
 	demoUrl: string;
 	codeUrl: string;
 	apiUrl?: string;
 	credentials?: DemoCredential[];
 }
 
-const { title, description, tags, demoUrl, codeUrl, apiUrl, credentials } = Astro.props;
+const { title, description, tags, features, gallery, demoUrl, codeUrl, apiUrl, credentials } = Astro.props;
 ---
 
 <div class="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden hover:border-blue-500 transition-all group">
@@ -34,6 +42,23 @@ const { title, description, tags, demoUrl, codeUrl, apiUrl, credentials } = Astr
 		<p class="text-slate-400 mb-6 leading-relaxed">
 			{description}
 		</p>
+		{gallery?.length && (
+			<div class="mb-6">
+				<ProjectGallery images={gallery} />
+			</div>
+		)}
+		{features?.length && (
+			<ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+				{features.map((feature) => (
+					<li class="flex items-start gap-2 text-slate-300 text-sm">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-blue-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+							<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+						</svg>
+						<span>{feature}</span>
+					</li>
+				))}
+			</ul>
+		)}
 		<div class="flex gap-4">
 			<a href={demoUrl} target="_blank" class="text-blue-400 font-bold hover:underline">Ver Demo →</a>
 			<a href={codeUrl} target="_blank" class="text-slate-300 hover:text-white">Código Fuente</a>

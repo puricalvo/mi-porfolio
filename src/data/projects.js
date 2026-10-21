@@ -5,6 +5,9 @@ import website from "../assets/projects/website.png";
 
 import pickup from "../assets/projects/fresh-coffee-vercel.vercel.app-pickup.png";
 import adminOrders from "../assets/projects/fresh-coffee-vercel.vercel.app-admin-orders-pending.png";
+import calendarAdminPanel from "../assets/projects/calendar-admin-panel.png";
+import calendarAdminMessages from "../assets/projects/calendar-admin-messages.png";
+import calendarCreateServices from "../assets/projects/calendar-create-services.png";
 
 export const featuredProject = {
   title: "CMS Builder",
@@ -120,7 +123,27 @@ export const projects = [
   {
     title: "Calendario de servicios",
     description:
-      "Aplicación fullstack para organizar servicios semanales de conductores. Incluye acceso por roles, asignación de servicios y descansos, seguimiento de incidencias y mensajería entre empleados y administración con historial paginado y confirmaciones de lectura.",
+      "Aplicación fullstack para organizar los servicios semanales de conductores. El panel de administración permite consultar los servicios por empleado y semana, asignar servicios, registrar descansos y hacer seguimiento de incidencias. También facilita la comunicación entre administración y conductores.",
+    gallery: [
+      {
+        src: calendarAdminPanel.src,
+        title: "Panel de administración · Servicios semanales por empleado",
+      },
+      {
+        src: calendarCreateServices.src,
+        title: "Panel de administración · Crear servicios o descansos",
+      },
+      {
+        src: calendarAdminMessages.src,
+        title: "Panel de administración · Historial de mensajes e incidencias",
+      },
+    ],
+    features: [
+      "Panel de administración con vista semanal por empleado",
+      "Creación de servicios y registro de descansos",
+      "Asignación de servicios a conductores",
+      "Seguimiento de incidencias y mensajería interna",
+    ],
     tags: [
       "React",
       "Material UI",
